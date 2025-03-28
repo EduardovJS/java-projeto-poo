@@ -4,11 +4,21 @@ public class Main {
 	public static void main(String[] args) {
 
 		Scanner scanner = new Scanner(System.in);
+		
+		Cofrinho cofre = new Cofrinho();
+		
+		Moeda real = new Real();
+		Moeda euro = new Euro();
+		Moeda dolar = new Dolar();
+		
+	
 		int opcao;
 		double valor;
 		int moeda;
 
 		System.out.println("Cofrinho");
+		System.out.println("Cotação Dolar: R$ 6,00");
+		System.out.println("Cotação Euro: R$ 7,00");
 
 		do {
 			System.out.println();
@@ -28,25 +38,42 @@ public class Main {
 				System.out.println("3 - Real");
 				moeda = scanner.nextInt();
 				System.out.println("Digite o valor da moeda:");
-				valor = scanner.nextDouble();
-				break;
+				valor = scanner.nextDouble();			
+				 
+                if (moeda == 1) {
+                    cofre.add(dolar, valor);
+                } else if (moeda == 2) {
+                    cofre.add(euro, valor);
+                } else if (moeda == 3) {
+                    cofre.add(real, valor);
+                }
+                break;
 			case 2:
 				// Remover Moedas
-				System.out.println("Escolha a moeda que queira remover:");
-				System.out.println("1 - Dolar");
-				System.out.println("2 - Euro");
-				System.out.println("3 - Real");
-				moeda = scanner.nextInt();
-				System.out.println("Digite o valor da moeda:");
-				valor = scanner.nextDouble();
-				break;
+                System.out.println("Escolha a moeda que queira remover:");
+                System.out.println("1 - Dólar");
+                System.out.println("2 - Euro");
+                System.out.println("3 - Real");
+                moeda = scanner.nextInt();
+                System.out.println("Digite o valor da moeda:");
+                valor = scanner.nextDouble();
+                
+                if (moeda == 1) {
+                    cofre.removerMoeda(dolar, valor);
+                } else if (moeda == 2) {
+                    cofre.removerMoeda(euro, valor);
+                } else if (moeda == 3) {
+                    cofre.removerMoeda(real, valor);
+                }
+                break;
 			case 3:
 				// Listar todas as Moedas
 				System.out.println("Lista: ");
+                cofre.listagemMoedas();
 				break;
 			case 4: 
 				// Valor total em Real
-				System.out.println("Valor total em real de todas as moedas: ");
+				cofre.totalConvertido();
 				break;
 			case 5:
 				// Encerrar
