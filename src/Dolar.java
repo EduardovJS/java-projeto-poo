@@ -1,15 +1,12 @@
-public class Dolar extends Moeda{
-	
-	private double cotacao = 6.0;
-	
-	
-	@Override
-	public double converter(double valorMoeda) {
-		return valorMoeda * cotacao;
-	}
+public class Dolar extends Moeda {
+    private double cotacao = 6.0;
 
-	@Override
-	public void info(double valorConvertido) {
-		System.out.println("Dolar: " + valorConvertido);
-	}
+    public Dolar(double valor) {
+        super("Dólar", valor); 
+    }
+
+    @Override
+    public double converter() {
+        return getValor() * cotacao;
+    }
 }

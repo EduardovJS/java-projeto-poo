@@ -2,33 +2,44 @@ import java.util.ArrayList;
 
 public class Cofrinho {
 
-	private ArrayList<Double> listaMoedas = new ArrayList<>();
+    // Lista para armazenar as moedas
+    private ArrayList<Moeda> listaMoedas = new ArrayList<>();
+    private double totalEmReal = 0.0;
 
-	public void add(Moeda moeda, double valor) {
-		double convertido  = moeda.converter(valor);
-		listaMoedas.add(convertido);	
-		moeda.info(convertido);
-	}
+    // Método para adicionar moeda e valor convertido
+    public void add(Moeda moeda) {
+        double convertido = moeda.converter(); // Converte o valor da moeda
+        moeda.setValor(convertido); // Atualiza o valor convertido
+        listaMoedas.add(moeda); // Adiciona a moeda na lista
+        totalEmReal += convertido; // Atualiza o total
+        moeda.info(); // Exibe as informações da moeda
+    }
 
-	public void removerMoeda(Moeda moeda, double valor) {
-		double convertido = moeda.converter(valor);
-		if(listaMoedas.contains(convertido)) {
-			listaMoedas.remove(convertido);
-		}
-	}
+    // Método para remover a moeda
+    public void removerMoeda(Moeda moeda) {
+        for (int i = 0; i < listaMoedas.size(); i++) {
+            if (listaMoedas.get(i).getValor() == moeda.getValor()) { // Compara o valor
+                totalEmReal -= listaMoedas.get(i).getValor(); // Subtrai o valor do total
+                listaMoedas.remove(i); // Remove a moeda
+                System.out.println("Moeda removida: " + moeda.getNome() + " | Valor: " + moeda.getValor());
+                break; 
+            }
+        }
+    }
 
-	public void listagemMoedas() {
-		for(double valor : listaMoedas) {
-			System.out.println("Valor:" + valor);
-		}
-	}
+    // Método para listar todas as moedas
+    public void listagemMoedas() {
+        if (listaMoedas.isEmpty()) {
+            System.out.println("Nenhuma moeda no cofrinho.");
+        } else {
+            for (Moeda moeda : listaMoedas) {
+                moeda.info(); // Exibe nome e valor
+            }
+        }
+    }
 
-	public void totalConvertido() {
-		double total = 0.0;
-		for(double valor: listaMoedas) {
-			total += valor;
-		}
-		
-	}
-
+    // Método para mostrar o total em Real
+    public void totalConvertido() {
+        System.out.println("Total em Real: R$ " + totalEmReal);
+    }
 }

@@ -1,14 +1,12 @@
 public class Euro extends Moeda {
-	private double cotacao = 7.0;
+    private double cotacao = 7.0;
 
-	@Override
-	public double converter(double valorMoeda) {
-		return valorMoeda * cotacao;
-	}
+    public Euro(double valor) {
+        super("Euro", valor); 
+    }
 
-	@Override
-	public void info(double valorConvertido) {
-		System.out.println("Euro: " + valorConvertido);
-	}
-
+    @Override
+    public double converter() {
+        return getValor() * cotacao;
+    }
 }
